@@ -29,6 +29,10 @@ test:
   requires:
     - pytest
   commands:
+    - psql -c 'create database travis_test;' -U postgres
+    - psql -U postgres -c "create extension postgis"
+    - ogr2ogr -f PostgreSQL PG:"dbname='travis_test' user='postgres' port='5432'" tests/data/stations/stations.shp
+    - psql -h localhost -p 5432 -U postgres -q -H -c "SELECT * FROM stations"
     - py.test --verbose
 
 about:

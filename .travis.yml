@@ -5,6 +5,11 @@ os:
 env:
   matrix:
   - CONDA_PY=36
+addons:
+  postgresql: 9.6
+  apt:
+    packages:
+      - postgresql-9.6-postgis-2.3
 install:
 - |
   echo "Installing a fresh version of Miniconda."
